@@ -1,14 +1,14 @@
 # strave-free-readers-writers-problem
 
-The readers-writers prblem is a classical problem of synchronization in the field of computer science. It is concerned with the writers and readers accesssing the critical sections of their code. The critical section of their code refes to that part of the code which has the usage of some resources which are used both during the writing and reading pocesses which makes the synchronized access to these resources essential for the proper functioning of the overall process. 
+The readers-writers prblem is a classical problem of `synchronization` in the field of computer science. It is concerned with the writers and readers accesssing the critical sections of their code. The `critical sections` of their code refes to that part of the code which has the usage of some resources which are used both during the writing and reading pocesses which makes the synchronized access to these resources essential for the proper functioning of the overall process. 
 
 Firstly I would like to present the solution (not starve free) which would be followed by the starve free solution to the problem.
 
 ## Data Structures involved -->
 
-We'll be using semaphores which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
+We'll be using `semaphores` which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
 
-Here is a classical solution to the readers-writers problem where the readers have a priority i.e. no reader should wait for other readers to finish simply because a writer is waiting: 
+Here is a solution to the readers-writers problem where the readers have a priority i.e. no reader should wait for other readers to finish simply because a writer is waiting: 
 
 ### Semaphores:
 ```cpp
@@ -69,13 +69,15 @@ Here is a classical solution to the readers-writers problem where the readers ha
 
 
 
-The problem with this approach is that the writers may starve here as any new reader requesting to enter the critial section gets a chance as soon as possible after the ongoing process exits its critical section.
+The problem with this approach is that the `writers may starve` here as any new reader requesting to enter the critial section gets a chance as soon as possible after the ongoing process exits its critical section.
+
+
 
 # Starve free approach -->
 
 To tackle starvation, we may proceed as follows-->
 
-Here, we may have an extra semaphore enter_mutex which needs to be acquired before any reader or writer proceeds to enter its critical section. Now, suppose a writer requests to enter its critical section an after that another reader requests to do the same. In this case, unlike our first immplemenation, the writer would have acquired the entry_mutex semaphore before the new reader and would be able to execute its critical section before the new reader. It basically provides entry into the critical section for the readers and writers on a first come first serve basis.
+Here, we may have an extra semaphore `enter_mutex` which needs to be acquired before any reader or writer proceeds to enter its critical section. Now, suppose a writer requests to enter its critical section an after that another reader requests to do the same. In this case, unlike our first implemenation, the writer would have acquired the entry_mutex semaphore before the new reader and would be able to execute its critical section before the new reader. It basically provides entry into the critical section for the readers and writers on a `FIFO` (first in first out basis.
 
 ### Semaphores:
 
