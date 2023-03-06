@@ -29,7 +29,9 @@ We'll be using semaphores which can be used to track the allocation/deallocation
         wait (rw_mutex); 
         // wait for the semaphore rw_mutex to be available
 
-        /* perform writing */
+        /* 
+              perform writing 
+                                   */
 
         signal(rw_mutex);
         // signal that a writer or a reader may resume its action
