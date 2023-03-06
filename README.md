@@ -4,7 +4,7 @@ the readers-writers prblem is a classical problem of synchronization in the fiel
 
 firstly I would like to present the classical solution (not starve free) which would be followed by the starve free solution to the problem.
 
-## data structures involved -->
+## data structures involved ->
 
 We'll be using semaphores which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
 
@@ -23,4 +23,17 @@ We'll be using semaphores which can be used to track the allocation/deallocation
 ```
 
 ### writer process:
+```cpp
+// writer process
+    do {
+        wait (rw_mutex); 
+        // wait for the semaphore rw_mutex to be available
+
+        /* perform writing */
+
+        signal(rw_mutex);
+        // signal that rw_mutex has been released
+
+    } while (true);
+```
 
