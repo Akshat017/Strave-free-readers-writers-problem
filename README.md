@@ -143,7 +143,7 @@ Here, we may have an extra semaphore `enter_mutex` which needs to be acquired be
  } while(true);
 ```
 
-Whenever a process calls to enter into its critical section, it has to acquire a semaphore and release it after its done. The usgae of the third semaphore maintains a FIFO order of the requests to be served i.e. in the order in which it is requested. So, we have tackled starvation here as our additional semaphore deals with the process requests of different readers and wirters in a FIFO (first in first out) order and hence starvation for resources wont be faced by any of the reader or writer processes.
+Whenever a process calls to enter into its critical section, it has to acquire the entry_mutex semaphore and release it after its done. The usgae of the third semaphore maintains a FIFO order of the requests to be served i.e. in the order in which it is requested. So, we have tackled starvation here as our additional semaphore deals with the process requests of different readers and wirters in a FIFO (first in first out) order and hence starvation for resources wont be faced by any of the reader or writer processes.
 
 
 
