@@ -96,6 +96,7 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
 ### reader process:
 
 ```cpp
+  do{
       wait(entry_mutex);
 
     wait(read_mutex);
@@ -118,12 +119,14 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
 
     if(read_count == 0)  signal (write_mutex);
     // no reader present to read
+  } while(true);
 ```
 
 ### writer process:
 
 ```cpp
-  // writers process
+ do{
+    // writers process
 
     wait (entry_mutex);
 
@@ -133,6 +136,7 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
 
     signal (write_mutex);
     signal (turn);
+ } while(true);
 ```
 
 
