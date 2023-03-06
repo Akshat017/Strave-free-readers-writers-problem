@@ -29,13 +29,56 @@ We'll be using semaphores which can be used to track the allocation/deallocation
         wait (rw_mutex); 
         // wait for the semaphore rw_mutex to be available
 
-        /* 
-              perform writing 
-                                   */
+        /*   perform writing   */
 
         signal(rw_mutex);
         // signal that a writer or a reader may resume its action
 
     } while (true);
 ```
+
+### reader process:
+```cpp
+        do{
+        wait (mutex);
+        // wait for read_count to be updated
+        
+        read_count++;
+        // increment read_count
+        
+        if(read_count==1) wait(rw_mutex);
+        // if the reader is the first one, it needs to acquire rw_mutex to start reading 
+        
+        signal(mutex);
+        
+        
+        /*   reading performed   */
+        
+        wait(mutex);
+        
+        read_count--;
+
+        if(read_count==0) signal(rw_mutex);
+        // if no reader is reading, a writer may get a chance
+        
+        signal(mutex);
+
+    }while(true);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
