@@ -75,7 +75,7 @@ To tackle starvation, we may proceed as follows-->
 
 Here, we may have an extra semaphore enter_mutex which needs to be acquired before any reader or writer proceeds to enter its critical section. Now, suppose a writer requests to enter its critical section an after that another reader requests to do the same. In this case, unlike our first immplemenation, the writer would have acquired the entry_mutex semaphore before the new reader and would be able to execute its critical section before the new reader. It basically provides entry into the critical section for the readers and writers on a first come first serve basis.
 
-### semaphores 
+### semaphores:
 
 ```cpp
   // semaphores and counters
@@ -93,7 +93,7 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
         // number of readers reading at the moment
 ```
 
-### reader process
+### reader process:
 
 ```cpp
       wait(entry_mutex);
@@ -120,7 +120,7 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
     // no reader present to read
 ```
 
-### writer process 
+### writer process:
 
 ```cpp
   // writers process
