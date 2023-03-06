@@ -21,3 +21,6 @@ We'll be using semaphores which can be used to track the allocation/deallocation
         int read_count = 0;       // initialize to 0
         // its signifies the number of readers currently reading the subject 
 ```
+
+### writer process:
+
