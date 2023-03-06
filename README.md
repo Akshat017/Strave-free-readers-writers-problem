@@ -69,7 +69,7 @@ Here is a classical solution to the readers-writers problem where the readers ha
 
 The problem with this approach is that the writers may starve here as the priority rests with the reader and as long as any reader is present, a writer may have to wait for a very long time to be able to write.
 
-#starve free approach-->
+# starve free approach-->
 
 
 
