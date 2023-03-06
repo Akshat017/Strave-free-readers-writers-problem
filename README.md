@@ -8,6 +8,6 @@ firstly I would like to present the classical solution (not starve free) which w
 
 We'll be using semaphores which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
 
-'''cpp
+```cpp
 cout<<yay;
-'''
+```
