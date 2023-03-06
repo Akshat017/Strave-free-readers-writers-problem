@@ -51,7 +51,6 @@ We'll be using semaphores which can be used to track the allocation/deallocation
         
         signal(mutex);
         
-        
         /*   reading performed   */
         
         wait(mutex);
