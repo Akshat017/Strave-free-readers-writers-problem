@@ -9,5 +9,14 @@ firstly I would like to present the classical solution (not starve free) which w
 We'll be using semaphores which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
 
 ```cpp
-cout<<yay;
+// semaphores involed-->
+        
+        semaphore rw_mutex = 1;   // intialized to 1
+        used to ensure mutual exclusion between the readers and writer processes
+        
+        semaphore mutex = 1;      // initialize to 1
+        // it is used to ensure mutual exclusion while the variable read_count gets updated
+        
+        int read_count = 0;       // initialize to 0
+        // its signifies the number of readers currently reading the subject 
 ```
