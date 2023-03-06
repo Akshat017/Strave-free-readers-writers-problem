@@ -12,7 +12,7 @@ We'll be using semaphores which can be used to track the allocation/deallocation
 // semaphores involed-->
         
         semaphore rw_mutex = 1;   // intialized to 1
-        used to ensure mutual exclusion between the readers and writer processes
+        // used to ensure mutual exclusion between the readers and writer processes
         
         semaphore mutex = 1;      // initialize to 1
         // it is used to ensure mutual exclusion while the variable read_count gets updated
