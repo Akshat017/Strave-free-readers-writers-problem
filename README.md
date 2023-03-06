@@ -32,7 +32,7 @@ We'll be using semaphores which can be used to track the allocation/deallocation
         /* perform writing */
 
         signal(rw_mutex);
-        // signal that rw_mutex has been released
+        // signal that a writer or a reader may resume its action
 
     } while (true);
 ```
