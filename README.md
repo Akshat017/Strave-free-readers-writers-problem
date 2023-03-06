@@ -4,7 +4,7 @@ the readers-writers prblem is a classical problem of synchronization in the fiel
 
 firstly I would like to present the classical solution (not starve free) which would be followed by the starve free solution to the problem.
 
-## data structures involved ->
+## data structures involved -->
 
 We'll be using semaphores which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
 
@@ -67,13 +67,73 @@ Here is a classical solution to the readers-writers problem where the readers ha
     }while(true);
 ```
 
-The problem with this approach is that the writers may starve here as the priority rests with the reader and as long as any reader is present, a writer may have to wait for a very long time to be able to write.
+The problem with this approach is that the writers may starve here as any new reader requesting to enter the critial section gets a chance as soon as possible after the ongoing process exits its critical section.
 
-# starve free approach ->
+# starve free approach -->
 
+To tackle starvation, we may proceed as follows-->
 
+Here, we may have an extra semaphore enter_mutex which needs to be acquired before any reader or writer proceeds to enter its critical section. Now, suppose a writer requests to enter its critical section an after that another reader requests to do the same. In this case, unlike our first immplemenation, the writer would have acquired the entry_mutex semaphore before the new reader and would be able to execute its critical section before the new reader. It basically provides entry into the critical section for the readers and writers on a first come first serve basis.
 
+### semaphores 
 
+```cpp
+  // semaphores and counters
+
+        sempahore entry_mutex = 1; 
+        // intially, entry available i.e. set to 1
+
+        semaphore write_mutex = 1;
+        // :(
+
+        semaphore read_mutex = 1;
+        // :(
+
+        int read_count=0;
+        // number of readers reading at the moment
+```
+
+### reader process
+
+```cpp
+      wait(entry_mutex);
+
+    wait(read_mutex);
+    // for read_count to be updated
+
+    read_count++;
+
+    if(read_count==1) wait (write_mutex);
+    // wait if any writer is writing
+
+    signal(read_mutex);
+    // signal for a reader to begin reading
+
+    // reading //
+
+    wait (read_mutex);
+    
+    read_count--;
+    // the reader exits the critical section
+
+    if(read_count == 0)  signal (write_mutex);
+    // no reader present to read
+```
+
+### writer process 
+
+```cpp
+  // writers process
+
+    wait (entry_mutex);
+
+    wait(write_mutex);
+
+    // writing process (critical section)
+
+    signal (write_mutex);
+    signal (turn);
+```
 
 
 
