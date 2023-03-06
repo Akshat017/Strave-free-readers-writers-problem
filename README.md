@@ -2,7 +2,7 @@
 
 the readers-writers prblem is a classical problem of synchronization in the field of computer science. It is concerned with the writers and readers accesssing the critical sections of their code. The critical section of their code refes to that part of the code which has the usage of some resources which are used both during the writing and reading pocesses which makes the synchronized access to these resources essential for the proper functioning of the overall process. 
 
-firstly I would like to present the classical solution (not starve free) which would be followed by the starve free solution to the problem.
+firstly I would like to present the solution (not starve free) which would be followed by the starve free solution to the problem.
 
 ## data structures involved -->
 
