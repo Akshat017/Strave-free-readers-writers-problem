@@ -1,4 +1,4 @@
-# strave-free-readers-writers-problem
+# Strave-free-readers-writers-problem
 
 The readers-writers prblem is a classical problem of `synchronization` in the field of computer science. It is concerned with the writers and readers accesssing the critical sections of their code. The `critical sections` of their code refes to that part of the code which has the usage of some resources which are used both during the writing and reading pocesses which makes the synchronized access to these resources essential for the proper functioning of the overall process. 
 
