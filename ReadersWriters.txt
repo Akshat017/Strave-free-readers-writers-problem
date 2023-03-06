@@ -1,0 +1,64 @@
+Semaphores-->
+
+/*
+    // semaphores and counters
+
+        sempahore entry_mutex = 1; 
+        // intially, entry available i.e. set to 1
+
+        semaphore write_mutex = 1;
+        // :(
+
+        semaphore read_mutex = 1;
+        // :(
+
+        int read_count=0;
+        // number of readers reading at the moment
+*/
+
+
+Reader-->
+
+/*
+    wait(entry_mutex);
+
+    wait(read_mutex);
+    // for read_count to be updated
+
+    read_count++;
+
+    if(read_count==1) wait (write_mutex);
+    // wait if any writer is writing
+
+    signal(read_mutex);
+    // signal for a reader to begin reading
+
+    // reading //
+
+    wait (read_mutex);
+    
+    read_count--;
+    // the reader exits the critical section
+
+    if(read_count == 0)  signal (write_mutex);
+    // no reader present to read
+
+
+*/
+
+
+Writers-->
+
+/*
+    // writers process
+
+    wait (entry_mutex);
+
+    wait(write_mutex);
+
+    // writing process (critical section)
+
+    signal (write_mutex);
+    signal (turn);
+*/
+
