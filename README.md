@@ -1,16 +1,16 @@
 # strave-free-readers-writers-problem
 
-the readers-writers prblem is a classical problem of synchronization in the field of computer science. It is concerned with the writers and readers accesssing the critical sections of their code. The critical section of their code refes to that part of the code which has the usage of some resources which are used both during the writing and reading pocesses which makes the synchronized access to these resources essential for the proper functioning of the overall process. 
+The readers-writers prblem is a classical problem of synchronization in the field of computer science. It is concerned with the writers and readers accesssing the critical sections of their code. The critical section of their code refes to that part of the code which has the usage of some resources which are used both during the writing and reading pocesses which makes the synchronized access to these resources essential for the proper functioning of the overall process. 
 
-firstly I would like to present the solution (not starve free) which would be followed by the starve free solution to the problem.
+Firstly I would like to present the solution (not starve free) which would be followed by the starve free solution to the problem.
 
-## data structures involved -->
+## Data Structures involved -->
 
 We'll be using semaphores which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
 
 Here is a classical solution to the readers-writers problem where the readers have a priority i.e. no reader should wait for other readers to finish simply because a writer is waiting: 
 
-### semaphores:
+### Semaphores:
 ```cpp
 // semaphores involed-->
         
@@ -24,22 +24,7 @@ Here is a classical solution to the readers-writers problem where the readers ha
         // its signifies the number of readers currently reading the subject 
 ```
 
-### writer process:
-```cpp
-// writer process
-    do {
-        wait (rw_mutex); 
-        // wait for the semaphore rw_mutex to be available
-
-        /*   perform writing   */
-
-        signal(rw_mutex);
-        // signal that a writer or a reader may resume its action
-
-    } while (true);
-```
-
-### reader process:
+### Reader process:
 ```cpp
         do{
         wait (mutex);
@@ -67,15 +52,32 @@ Here is a classical solution to the readers-writers problem where the readers ha
     }while(true);
 ```
 
+### Writer process:
+```cpp
+// writer process
+    do {
+        wait (rw_mutex); 
+        // wait for the semaphore rw_mutex to be available
+
+        /*   perform writing   */
+
+        signal(rw_mutex);
+        // signal that a writer or a reader may resume its action
+
+    } while (true);
+```
+
+
+
 The problem with this approach is that the writers may starve here as any new reader requesting to enter the critial section gets a chance as soon as possible after the ongoing process exits its critical section.
 
-# starve free approach -->
+# Starve free approach -->
 
 To tackle starvation, we may proceed as follows-->
 
 Here, we may have an extra semaphore enter_mutex which needs to be acquired before any reader or writer proceeds to enter its critical section. Now, suppose a writer requests to enter its critical section an after that another reader requests to do the same. In this case, unlike our first immplemenation, the writer would have acquired the entry_mutex semaphore before the new reader and would be able to execute its critical section before the new reader. It basically provides entry into the critical section for the readers and writers on a first come first serve basis.
 
-### semaphores:
+### Semaphores:
 
 ```cpp
   // semaphores and counters
@@ -93,7 +95,7 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
         // number of readers reading at the moment
 ```
 
-### reader process:
+### Reader process:
 
 ```cpp
   do{
@@ -122,7 +124,7 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
   } while(true);
 ```
 
-### writer process:
+### Writer process:
 
 ```cpp
  do{
@@ -138,6 +140,8 @@ Here, we may have an extra semaphore enter_mutex which needs to be acquired befo
     signal (turn);
  } while(true);
 ```
+
+Whenever a process calls to enter into its critical section, it has to acquire a semaphore and release it after its done. The usgae of the third semaphore maintains a FIFO order of the requests to be served i.e. in the order in which it is requested. So, we have tackled starvation here as our additional semaphore deals with the process requests of different readers and wirters in a FIFO (first in first out) order and hence starvation for resources wont be faced by any of the reader or writer processes.
 
 
 
