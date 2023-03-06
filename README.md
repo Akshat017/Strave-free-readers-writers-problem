@@ -59,7 +59,7 @@ Here is a solution to the readers-writers problem where the readers have a prior
         wait (rw_mutex); 
         // wait for the semaphore rw_mutex to be available
 
-        /******CRITICAL SECTION*******/
+                /******CRITICAL SECTION*******/
 
         signal(rw_mutex);
         // signal that a writer or a reader may resume its action
@@ -114,7 +114,7 @@ Here, we may have an extra semaphore `enter_mutex` which needs to be acquired be
     signal(read_mutex);
     // signal for a reader to begin reading
 
-    /******CRITICAL SECTION*******/
+        /******CRITICAL SECTION*******/
 
     wait (read_mutex);
     
@@ -136,7 +136,7 @@ Here, we may have an extra semaphore `enter_mutex` which needs to be acquired be
 
     wait(write_mutex);
 
-    /******CRITICAL SECTION*******/
+         /******CRITICAL SECTION*******/
 
     signal (write_mutex);
     signal (turn);
