@@ -8,6 +8,8 @@ firstly I would like to present the classical solution (not starve free) which w
 
 We'll be using semaphores which can be used to track the allocation/deallocation of resources, the waiting process requests, available instances of a resource etc. We have some kind of a queue associated with each semaphore to keep track of the waiting processes and provide them with resources whenever it finds them free. 
 
+Here is a classical solution to the readers-writers problem where the readers have a priority i.e. no reader should wait for other readers to finish simply because a writer is waiting: 
+
 ### semaphores:
 ```cpp
 // semaphores involed-->
